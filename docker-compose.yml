@@ -1,31 +1,37 @@
-version: "3"
+version: '2'
 
 services:
-  mysql:
-    image: mysql:5.7
-    restart: unless-stopped
-    ports:
-      - "3306:3306"
+  mariadb:
+    image: docker.io/bitnami/mariadb:latest
     volumes:
-      - ./mysql:/var/lib/mysql
+      - 'mariadb_data:/bitnami/mariadb'
     environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_PASSWORD: wordpress
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_USER: wordpress
+      - MARIADB_DATABASE=wordpress
+      - MARIADB_PASSWORD=wordpress
+      - MARIADB_ROOT_PASSWORD=wordpress
+      - MARIADB_USER=wordpress
 
   wordpress:
-    depends_on:
-      - mysql
-    image: wordpress
-    restart: unless-stopped
+    image: docker.io/bitnami/wordpress:latest
     ports:
-      - "80:80"
+      - '80:8080'
+      - '443:8443'
     volumes:
-      - ./data:/var/www/html/:rw
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini/:ro
+      - 'wordpress_data:/bitnami/wordpress'
+    depends_on:
+      - mariadb
     environment:
-      WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_USER: wordpress
+      - WORDPRESS_BLOG_NAME=Wordpress
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_NAME=wordpress
+      - WORDPRESS_DATABASE_PASSWORD=wordpress
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=wordpress
+      - WORDPRESS_PASSWORD=cUV(TLY75Hkz3a3DTN
+      - WORDPRESS_USERNAME=admin
+
+volumes:
+  mariadb_data:
+    driver: local
+  wordpress_data:
+    driver: local
