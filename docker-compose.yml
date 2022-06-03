@@ -23,7 +23,6 @@ services:
     depends_on:
       - mariadb
     environment:
-      - WORDPRESS_AUTO_UPDATE_LEVEL=major
       - WORDPRESS_BLOG_NAME=Wordpress
       - WORDPRESS_DATABASE_HOST=mariadb
       - WORDPRESS_DATABASE_NAME=wordpress
@@ -31,6 +30,7 @@ services:
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=wordpress
       - WORDPRESS_EMAIL=aletc0409@gmail.com
+      - WORDPRESS_ENABLE_HTTPS=yes
       - WORDPRESS_FIRST_NAME=Alejandro
       - WORDPRESS_LAST_NAME=Teran
       - WORDPRESS_PASSWORD=cUV(TLY75Hkz3a3DTN
