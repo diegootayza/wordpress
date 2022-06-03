@@ -36,7 +36,7 @@ services:
       - WORDPRESS_LAST_NAME=Teran
       - WORDPRESS_PASSWORD=cUV(TLY75Hkz3a3DTN
       - WORDPRESS_USERNAME=admin
-      - WORDPRESS_EXTRA_WP_CONFIG_CONTENT="define( 'WP_MEMORY_LIMIT', '256M' );"
+      - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' );
 
 volumes:
   mariadb_data:
