@@ -23,6 +23,7 @@ services:
     depends_on:
       - mariadb
     environment:
+      - PHP_MAX_INPUT_VARS=3000
       - WORDPRESS_BLOG_NAME=Wordpress
       - WORDPRESS_DATABASE_HOST=mariadb
       - WORDPRESS_DATABASE_NAME=wordpress
