@@ -36,6 +36,10 @@ services:
       - WORDPRESS_FIRST_NAME=Mauricio
       - WORDPRESS_LAST_NAME=Zelada
       - WORDPRESS_PASSWORD=cUV(TLY75Hkz3a3DTN
+      - WORDPRESS_SMTP_HOST=smtp.live.com
+      - WORDPRESS_SMTP_PASSWORD=sindistracciones011
+      - WORDPRESS_SMTP_PORT=465
+      - WORDPRESS_SMTP_USER=sindistracciones1000@hotmail.com
       - WORDPRESS_USERNAME=admin
 
 volumes:
