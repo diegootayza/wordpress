@@ -31,15 +31,11 @@ services:
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=wordpress
       - WORDPRESS_EMAIL=sindistracciones1000@gmail.com
-      - WORDPRESS_ENABLE_HTTPS=no
+      - WORDPRESS_ENABLE_HTTPS=yes
       - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' );
       - WORDPRESS_FIRST_NAME=Mauricio
       - WORDPRESS_LAST_NAME=Zelada
       - WORDPRESS_PASSWORD=cUV(TLY75Hkz3a3DTN
-      - WORDPRESS_SMTP_HOST=smtp.live.com
-      - WORDPRESS_SMTP_PASSWORD=sindistracciones011
-      - WORDPRESS_SMTP_PORT=465
-      - WORDPRESS_SMTP_USER=sindistracciones1000@hotmail.com
       - WORDPRESS_USERNAME=admin
 
 volumes:
