@@ -4,8 +4,9 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:latest
     container_name: db
+    restart: always
     volumes:
-      - "mariadb_data:/bitnami/mariadb"
+      - "db_data:/bitnami/mariadb"
     environment:
       - MARIADB_DATABASE=wordpress
       - MARIADB_PASSWORD=wordpress
@@ -13,17 +14,19 @@ services:
       - MARIADB_USER=wordpress
 
   wordpress:
-    image: docker.io/bitnami/wordpress:latest
+    image: docker.io/bitnami/wordpress:5.8.3
     container_name: web
+    restart: always
     ports:
       - "80:8080"
       - "443:8443"
     volumes:
-      - "wordpress_data:/bitnami/wordpress"
+      - "web_data:/bitnami/wordpress"
     depends_on:
       - mariadb
     environment:
       - PHP_MAX_INPUT_VARS=3000
+      - WORDPRESS_AUTO_UPDATE_LEVEL=major
       - WORDPRESS_BLOG_NAME=Wordpress
       - WORDPRESS_DATABASE_HOST=mariadb
       - WORDPRESS_DATABASE_NAME=wordpress
@@ -31,7 +34,7 @@ services:
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=wordpress
       - WORDPRESS_EMAIL=sindistracciones1000@gmail.com
-      - WORDPRESS_ENABLE_HTTPS=yes
+      - WORDPRESS_ENABLE_HTTPS=no
       - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' );
       - WORDPRESS_FIRST_NAME=Mauricio
       - WORDPRESS_LAST_NAME=Zelada
@@ -39,7 +42,7 @@ services:
       - WORDPRESS_USERNAME=admin
 
 volumes:
-  mariadb_data:
+  db_data:
     driver: local
-  wordpress_data:
+  web_data:
     driver: local
