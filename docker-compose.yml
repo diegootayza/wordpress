@@ -6,7 +6,7 @@ services:
     container_name: db
     restart: always
     volumes:
-      - "db_data:/bitnami/mariadb/:rw"
+      - "./db_data:/bitnami/mariadb/:rw"
     environment:
       - MARIADB_DATABASE=wordpress
       - MARIADB_PASSWORD=wordpress
@@ -21,7 +21,7 @@ services:
       - "80:8080"
       - "443:8443"
     volumes:
-      - "web_data:/bitnami/wordpress/:rw"
+      - "./web_data:/bitnami/wordpress/:rw"
     depends_on:
       - mariadb
     environment:
@@ -33,16 +33,10 @@ services:
       - WORDPRESS_DATABASE_PASSWORD=wordpress
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=wordpress
-      - WORDPRESS_EMAIL=
+      - WORDPRESS_EMAIL=example@example.com
       - WORDPRESS_ENABLE_HTTPS=yes
-      - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' );
-      - WORDPRESS_FIRST_NAME=
-      - WORDPRESS_LAST_NAME=
-      - WORDPRESS_PASSWORD=
-      - WORDPRESS_USERNAME=
-
-volumes:
-  db_data:
-    driver: local
-  web_data:
-    driver: local
+      - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' ); define( 'WP_CACHE', true );
+      - WORDPRESS_FIRST_NAME=Name
+      - WORDPRESS_LAST_NAME=Surname
+      - WORDPRESS_PASSWORD=A11B22C33D
+      - WORDPRESS_USERNAME=admin
