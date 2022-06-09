@@ -6,7 +6,7 @@ services:
     container_name: db
     restart: always
     volumes:
-      - "./db_data:/bitnami/mariadb/:rw"
+      - "db_data:/bitnami/mariadb/:rw"
     environment:
       - MARIADB_DATABASE=wordpress
       - MARIADB_PASSWORD=wordpress
@@ -21,7 +21,7 @@ services:
       - "80:8080"
       - "443:8443"
     volumes:
-      - "./web_data:/bitnami/wordpress/:rw"
+      - "web_data:/bitnami/wordpress/:rw"
     depends_on:
       - mariadb
     environment:
@@ -40,3 +40,7 @@ services:
       - WORDPRESS_LAST_NAME=Landa
       - WORDPRESS_PASSWORD=A11B22C33D
       - WORDPRESS_USERNAME=admin
+
+volumes:
+  db_data:
+  web_data:
