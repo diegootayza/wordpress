@@ -33,12 +33,12 @@ services:
       - WORDPRESS_DATABASE_PASSWORD=wordpress
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=wordpress
-      - WORDPRESS_EMAIL=afiliado_2020@hotmail.com
+      - WORDPRESS_EMAIL=faenzofarodr@gmail.com
       - WORDPRESS_ENABLE_HTTPS=yes
       - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' ); define( 'WP_CACHE', true );
-      - WORDPRESS_FIRST_NAME=Jose
-      - WORDPRESS_LAST_NAME=Landa
-      - WORDPRESS_PASSWORD=A11B22C33D
+      - WORDPRESS_FIRST_NAME=Enzo
+      - WORDPRESS_LAST_NAME=Rodriguez
+      - WORDPRESS_PASSWORD=admin
       - WORDPRESS_USERNAME=admin
 
 volumes:
