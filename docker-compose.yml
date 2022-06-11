@@ -1,46 +1,46 @@
-version: "3"
+version: "3.9"
 
 services:
-  mariadb:
-    image: docker.io/bitnami/mariadb:latest
+  db:
+    image: mariadb:10
     container_name: db
     restart: always
-    volumes:
-      - "db_data:/bitnami/mariadb/:rw"
     environment:
       - MARIADB_DATABASE=wordpress
-      - MARIADB_PASSWORD=wordpress
-      - MARIADB_ROOT_PASSWORD=wordpress
-      - MARIADB_USER=wordpress
+      - MARIADB_PASSWORD=v%4P4SXBavtfXALA^L@x
+      - MARIADB_ROOT_PASSWORD=uFqE$TzTx&pqMuege*8W
+      - MARIADB_USER=admin
+    volumes:
+      - ./mysql:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 384M
+        reservations:
+          cpus: "0.25"
+          memory: 192M
 
-  wordpress:
-    image: docker.io/bitnami/wordpress:5.8.3
+  web:
+    image: wordpress:php7.4
     container_name: web
     restart: always
     ports:
-      - "80:8080"
-      - "443:8443"
-    volumes:
-      - "web_data:/bitnami/wordpress/:rw"
-    depends_on:
-      - mariadb
+      - 80:80
     environment:
-      - PHP_MAX_INPUT_VARS=3000
-      - WORDPRESS_AUTO_UPDATE_LEVEL=major
-      - WORDPRESS_BLOG_NAME=Wordpress
-      - WORDPRESS_DATABASE_HOST=mariadb
-      - WORDPRESS_DATABASE_NAME=wordpress
-      - WORDPRESS_DATABASE_PASSWORD=wordpress
-      - WORDPRESS_DATABASE_PORT_NUMBER=3306
-      - WORDPRESS_DATABASE_USER=wordpress
-      - WORDPRESS_EMAIL=llanosromario2@gmail.com
-      - WORDPRESS_ENABLE_HTTPS=yes
-      - WORDPRESS_EXTRA_WP_CONFIG_CONTENT=define( 'WP_MEMORY_LIMIT', '256M' ); define( 'WP_CACHE', true );
-      - WORDPRESS_FIRST_NAME=Juan
-      - WORDPRESS_LAST_NAME=Martinez
-      - WORDPRESS_PASSWORD=juancito12ju12
-      - WORDPRESS_USERNAME=admin
-
-volumes:
-  db_data:
-  web_data:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_DB_PASSWORD=v%4P4SXBavtfXALA^L@x
+      - WORDPRESS_DB_USER=admin
+      - WORDPRESS_CONFIG_EXTRA=define('WP_MEMORY_LIMIT', '256M'); define('WP_CACHE', true); define('COMPRESS_SCRIPTS', true); define('COMPRESS_CSS', true);
+    volumes:
+      - ./html:/var/www/html
+      - ./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 384M
+        reservations:
+          cpus: "0.25"
+          memory: 192M
