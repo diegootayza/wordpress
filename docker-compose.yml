@@ -15,8 +15,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.40"
-          memory: 512M
+          cpus: "0.30"
+          memory: 256M
         reservations:
           cpus: "0.25"
           memory: 192M
@@ -26,21 +26,21 @@ services:
     container_name: web
     restart: always
     ports:
-      - 80:80
+      - 4000:80
     environment:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_DB_PASSWORD=v%4P4SXBavtfXALA^L@x
       - WORDPRESS_DB_USER=admin
-      - WORDPRESS_CONFIG_EXTRA=define('WP_MEMORY_LIMIT', '256M'); define('WP_CACHE', true);
+      - WORDPRESS_CONFIG_EXTRA=define('WP_MEMORY_LIMIT', '384M'); define('WP_CACHE', true);
     volumes:
       - ./html:/var/www/html
       - ./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini
     deploy:
       resources:
         limits:
-          cpus: "0.40"
-          memory: 512M
+          cpus: "0.50"
+          memory: 384M
         reservations:
           cpus: "0.25"
           memory: 192M
